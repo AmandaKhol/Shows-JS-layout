@@ -15,8 +15,8 @@ let favorites = [];
 
 // prueba de maquetación
 
-/* filterInput.value = "friends";
-getDataFromApi(); */
+filterInput.value = "friends";
+getDataFromApi();
 
 function getDataFromApi() {
   fetch(`http://api.tvmaze.com/search/shows?q=${filterInput.value}`)
@@ -35,7 +35,7 @@ function showsPaint() {
     //list item
     let showItem = document.createElement("li");
     if (isFavShow(show)) {
-      showItem.classList.add("show", "js-show", "fav-show-marked");
+      showItem.classList.add("show", "js-show", "show__marked");
     } else {
       showItem.classList.add("show", "js-show");
     }
@@ -54,7 +54,7 @@ function favPaint() {
   for (const fav of favorites) {
     //list item
     let favItem = document.createElement("li");
-    favItem.classList.add("show", "js-fav");
+    favItem.classList.add("show", "show__fav", "js-fav");
     favItem.dataset.id = fav.show.id;
     favoritesContainer.appendChild(favItem);
     renderShows(fav, favItem);

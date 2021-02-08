@@ -1,12 +1,6 @@
-.show {
-  box-sizing: border-box;
-}
-
-.show__image {
-  height: 80px;
-  width: auto;
-}
-
-.fav-show-marked {
-  background-color: aquamarine;
+.shows-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0px;
 }
