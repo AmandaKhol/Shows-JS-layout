@@ -16,8 +16,8 @@ let favorites = [];
 
 // prueba de maquetación
 
-filterInput.value = "friends";
-getDataFromApi();
+/* filterInput.value = "friends";
+getDataFromApi(); */
 
 function getDataFromApi() {
     fetch(`http://api.tvmaze.com/search/shows?q=${filterInput.value}`)
@@ -48,8 +48,9 @@ function handleFavShow(ev) {
         console.log(showFavPaint);
     } else {
         const showRePaint = showsContainer.querySelector(`[data-id="${clickedShowId}"]`);
-        favorites.splice(favoritesFoundIndex, 1);
         showRePaint.classList.remove("fav-show-marked");
+        favorites.splice(favoritesFoundIndex, 1);
+
     }
     saveFavorites();
     favPaint();
@@ -75,6 +76,11 @@ function showsPaint() {
     for (const show of shows) {
         //list item
         let showItem = document.createElement('li');
+        if (isFavShow(show)) {
+            showItem.classList.add('show', 'js-show', 'fav-show-marked');
+        } else {
+            showItem.classList.add('show', 'js-show');
+        }
         showItem.classList.add('show', 'js-show');
         showItem.dataset.id = show.show.id;
         showsContainer.appendChild(showItem);
@@ -105,6 +111,18 @@ function showsPaint() {
 
     }
 }
+
+function isFavShow(show) {
+    const favoriteFound = favorites.find((favorite) => {
+        return favorite.show.id === show.show.id;
+    });
+    if (favoriteFound === undefined) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
   
 function favPaint() {
     favoritesContainer.innerHTML = "";
@@ -142,6 +160,11 @@ function favPaint() {
         }
         favImage.alt = fav.show.name;
         imageContainer.appendChild(favImage);
+
+        //add class to shows fav in shows-section
+/*         const showRePaint = showsContainer.querySelector(`[data-id="${fav.show.id}"]`);
+        showRePaint.classList.add("fav-show-marked");
+        console.log(showRePaint); */
     }
     const favItems = document.querySelectorAll(".js-fav");
     for (const favItem of favItems) {
@@ -154,6 +177,10 @@ function favPaint() {
 function paintFavoritesFromLocalStorage() {
     const localStorageFavorites = localStorage.getItem("favorites");
     favorites = JSON.parse(localStorageFavorites);
+    if (favorites === null) {
+        favorites = [];
+        return false;
+    }
     favPaint();
 }
 
