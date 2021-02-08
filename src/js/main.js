@@ -8,7 +8,8 @@ const formElement = document.querySelector('.js-form');
 const searchButton = document.querySelector('.js-search');
 const showsContainer = document.querySelector('.js-shows-list');
 const favoritesContainer = document.querySelector('.js-fav-list');
-const showSection = document.querySelector('.shows-section');
+const reset = document.querySelector('.js-reset');
+/* const showSection = document.querySelector('.shows-section'); */
 
 let shows = [];
 let favorites = [];
@@ -27,7 +28,7 @@ function getDataFromApi() {
             showsPaint();
         }).catch(error =>
             console.log('Hubo un problema con la petición Fetch:' + error.message));
-
+        }
 function showsPaint() {
     showsContainer.innerHTML = "";
     for (const show of shows) {
@@ -106,6 +107,10 @@ function paintFavoritesFromLocalStorage() {
     }
     favPaint();
 }
+
+function saveFavorites() {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
 function handleSearch() {
 /*     if (shows.length === 0) {
         let showWarningElement = document.createElement('p');
@@ -136,15 +141,19 @@ function handleFavShow(ev) {
     showsPaint();
 }
 
-function saveFavorites() {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-}
-
 function handleForm(ev) {
     ev.preventDefault();
+}
+
+function handleReset() {
+    favorites = [];
+    localStorage.removeItem('favorites');
+    favPaint();
+    showsPaint();
 }
 
 paintFavoritesFromLocalStorage();
 
 searchButton.addEventListener("click", handleSearch);
 formElement.addEventListener("submit", handleForm);
+reset.addEventListener("click", handleReset);
