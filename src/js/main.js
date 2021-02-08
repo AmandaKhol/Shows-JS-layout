@@ -6,12 +6,13 @@
 const filterInput = document.querySelector('.js-filter');
 const formElement = document.querySelector('.js-form');
 const searchButton = document.querySelector('.js-search');
-const showsContainer = document.querySelector('.js-shows');
-const favoritesContainer = document.querySelector('.js-fav');
+const showsContainer = document.querySelector('.js-shows-list');
+const favoritesContainer = document.querySelector('.js-fav-list');
 const showSection = document.querySelector('.section-films');
 
 let shows = [];
 let favorites = [];
+
 
 // api
 
@@ -29,8 +30,21 @@ function handleSearch() {
 }
 
 function handleFavShow(ev) {
-    favorites.push(ev.currentTarget);
-    console.log("favorites" + favorites);
+    const clickedShowId = parseInt(ev.currentTarget.dataset['id']);
+    const favoritesFoundIndex = favorites.findIndex(favorite => favorite.show.id === clickedShowId );
+    if (favoritesFoundIndex === -1) {
+        //push: Añado favorito a la lista */
+    const showFound = shows.find(function (show) {
+        console.log(show.show.id);
+        return show.show.id === clickedShowId;
+        });
+        favorites.push(showFound);
+    } else {
+        favorites.splice(favoritesFoundIndex, 1);
+    }
+    console.log(favorites);
+    favPaint();
+
 }
 
 
@@ -78,7 +92,51 @@ function showsPaint() {
         showItem.addEventListener("click", handleFavShow);
         
     }
-  }
+}
+  
+function favPaint() {
+    favoritesContainer.innerHTML = "";
+    
+/*     if (shows.length === 0) {
+        let showWarningElement = document.createElement('p');
+        showWarningElement.classList.add('empty-result');
+        showSection.appendChild(showWarningElement);
+        let showWarningMessage = document.createTextNode("no hay resultados");
+        showWarningElement.appendChild(showWarningMessage);
+    } */
+    for (const fav of favorites) {
+        //list item
+        let favItem = document.createElement('li');
+        favItem.classList.add('show', 'js-fav');
+        favItem.dataset.id = fav.show.id;
+        favoritesContainer.appendChild(favItem);
+        //title
+        let favTitleElement = document.createElement('h3');
+        favTitleElement.classList.add('show__title');
+        favItem.appendChild(favTitleElement);
+        let favTitleContent = document.createTextNode(fav.show.name);
+        favTitleElement.appendChild(favTitleContent);
+        //image
+        let imageContainer = document.createElement('div');
+        imageContainer.classList.add("show__img");
+        favItem.appendChild(imageContainer);
+        let favImage = document.createElement('img');
+        if (fav.show.image === null) {
+            favImage.src =
+                "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
+        } else {
+            favImage.src = fav.show.image.medium;
+        }
+        favImage.alt = fav.show.name;
+        imageContainer.appendChild(favImage);
+    }
+    const favItems = document.querySelectorAll(".js-fav");
+    for (const favItem of favItems) {
+        favItem.addEventListener("click", handleFavShow);
+        
+    }
+    
+}
 
 searchButton.addEventListener("click", handleSearch);
 formElement.addEventListener("submit", handleForm);
