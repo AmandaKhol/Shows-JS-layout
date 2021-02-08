@@ -43,17 +43,13 @@ function handleFavShow(ev) {
         return show.show.id === clickedShowId;
         });
         favorites.push(showFound);
-        const showFavPaint = showsContainer.querySelector(`[data-id="${clickedShowId}"]`);
-        showFavPaint.classList.add("fav-show-marked");
-        console.log(showFavPaint);
     } else {
-        const showRePaint = showsContainer.querySelector(`[data-id="${clickedShowId}"]`);
-        showRePaint.classList.remove("fav-show-marked");
         favorites.splice(favoritesFoundIndex, 1);
 
     }
     saveFavorites();
     favPaint();
+    showsPaint();
 }
 
 function saveFavorites() {
