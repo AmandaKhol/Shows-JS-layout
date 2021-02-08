@@ -1,11 +1,12 @@
-.shows-section {
+.show {
   box-sizing: border-box;
-  /*   & .show__img {
-    height: 50px;
-    width: auto;
-  } */
 }
 
-.shows {
-  box-sizing: border-box;
+.show__image {
+  height: 80px;
+  width: auto;
+}
+
+.fav-show-marked {
+  background-color: aquamarine;
 }

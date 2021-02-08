@@ -14,7 +14,10 @@ let shows = [];
 let favorites = [];
 
 
-// api
+// prueba de maquetación
+
+filterInput.value = "friends";
+getDataFromApi();
 
 function getDataFromApi() {
     fetch(`http://api.tvmaze.com/search/shows?q=${filterInput.value}`)
@@ -31,6 +34,7 @@ function handleSearch() {
 
 function handleFavShow(ev) {
     const clickedShowId = parseInt(ev.currentTarget.dataset['id']);
+    //miro si ya estaba en favoritos
     const favoritesFoundIndex = favorites.findIndex(favorite => favorite.show.id === clickedShowId );
     if (favoritesFoundIndex === -1) {
         //push: Añado favorito a la lista */
@@ -39,14 +43,21 @@ function handleFavShow(ev) {
         return show.show.id === clickedShowId;
         });
         favorites.push(showFound);
+        const showFavPaint = showsContainer.querySelector(`[data-id="${clickedShowId}"]`);
+        showFavPaint.classList.add("fav-show-marked");
+        console.log(showFavPaint);
     } else {
+        const showRePaint = showsContainer.querySelector(`[data-id="${clickedShowId}"]`);
         favorites.splice(favoritesFoundIndex, 1);
+        showRePaint.classList.remove("fav-show-marked");
     }
-    console.log(favorites);
+    saveFavorites();
     favPaint();
-
 }
 
+function saveFavorites() {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
 
 function handleForm(ev) {
     ev.preventDefault();
@@ -75,9 +86,10 @@ function showsPaint() {
         showTitleElement.appendChild(showTitleContent);
         //image
         let imageContainer = document.createElement('div');
-        imageContainer.classList.add("show__img");
+        imageContainer.classList.add("show__img--container");
         showItem.appendChild(imageContainer);
         let showImage = document.createElement('img');
+        showImage.classList.add("show__image");
         if (show.show.image === null) {
             showImage.src =
                 "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
@@ -90,7 +102,7 @@ function showsPaint() {
     const showItems = document.querySelectorAll(".js-show");
     for (const showItem of showItems) {
         showItem.addEventListener("click", handleFavShow);
-        
+
     }
 }
   
@@ -121,6 +133,7 @@ function favPaint() {
         imageContainer.classList.add("show__img");
         favItem.appendChild(imageContainer);
         let favImage = document.createElement('img');
+        favImage.classList.add("show__image");
         if (fav.show.image === null) {
             favImage.src =
                 "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
@@ -137,6 +150,14 @@ function favPaint() {
     }
     
 }
+
+function paintFavoritesFromLocalStorage() {
+    const localStorageFavorites = localStorage.getItem("favorites");
+    favorites = JSON.parse(localStorageFavorites);
+    favPaint();
+}
+
+paintFavoritesFromLocalStorage();
 
 searchButton.addEventListener("click", handleSearch);
 formElement.addEventListener("submit", handleForm);
