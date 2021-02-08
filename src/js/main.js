@@ -8,7 +8,7 @@ const formElement = document.querySelector('.js-form');
 const searchButton = document.querySelector('.js-search');
 const showsContainer = document.querySelector('.js-shows-list');
 const favoritesContainer = document.querySelector('.js-fav-list');
-const showSection = document.querySelector('.section-films');
+const showSection = document.querySelector('.shows-section');
 
 let shows = [];
 let favorites = [];
@@ -21,54 +21,15 @@ getDataFromApi(); */
 
 function getDataFromApi() {
     fetch(`http://api.tvmaze.com/search/shows?q=${filterInput.value}`)
-  .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
             shows = data;
             showsPaint();
-        }).catch(error => `Error en la recolección. Error ${error}.`);
-}
-
-function handleSearch() {
-    getDataFromApi();
-}
-
-function handleFavShow(ev) {
-    const clickedShowId = parseInt(ev.currentTarget.dataset['id']);
-    //miro si ya estaba en favoritos
-    const favoritesFoundIndex = favorites.findIndex(favorite => favorite.show.id === clickedShowId );
-    if (favoritesFoundIndex === -1) {
-        //push: Añado favorito a la lista */
-    const showFound = shows.find(function (show) {
-        console.log(show.show.id);
-        return show.show.id === clickedShowId;
-        });
-        favorites.push(showFound);
-    } else {
-        favorites.splice(favoritesFoundIndex, 1);
-
-    }
-    saveFavorites();
-    favPaint();
-    showsPaint();
-}
-
-function saveFavorites() {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-}
-
-function handleForm(ev) {
-    ev.preventDefault();
-}
+        }).catch(error =>
+            console.log('Hubo un problema con la petición Fetch:' + error.message));
 
 function showsPaint() {
     showsContainer.innerHTML = "";
-/*     if (shows.length === 0) {
-        let showWarningElement = document.createElement('p');
-        showWarningElement.classList.add('empty-result');
-        showSection.appendChild(showWarningElement);
-        let showWarningMessage = document.createTextNode("no hay resultados");
-        showWarningElement.appendChild(showWarningMessage);
-    } */
     for (const show of shows) {
         //list item
         let showItem = document.createElement('li');
@@ -77,10 +38,34 @@ function showsPaint() {
         } else {
             showItem.classList.add('show', 'js-show');
         }
-        showItem.classList.add('show', 'js-show');
         showItem.dataset.id = show.show.id;
         showsContainer.appendChild(showItem);
-        //title
+        renderShows(show, showItem);
+    }
+    const showItems = document.querySelectorAll(".js-show");
+    for (const showItem of showItems) {
+        showItem.addEventListener("click", handleFavShow);
+
+    }
+}
+
+function favPaint() {
+    favoritesContainer.innerHTML = "";
+    for (const fav of favorites) {
+        //list item
+        let favItem = document.createElement('li');
+        favItem.classList.add('show', 'js-fav');
+        favItem.dataset.id = fav.show.id;
+        favoritesContainer.appendChild(favItem);
+        renderShows(fav, favItem);
+    } 
+    const favItems = document.querySelectorAll(".js-fav");
+    for (const favItem of favItems) {
+        favItem.addEventListener("click", handleFavShow);
+    }
+}
+
+function renderShows(show, showItem) {
         let showTitleElement = document.createElement('h3');
         showTitleElement.classList.add('show__title');
         showItem.appendChild(showTitleElement);
@@ -99,13 +84,7 @@ function showsPaint() {
             showImage.src = show.show.image.medium;
         }
         showImage.alt = show.show.name;
-        imageContainer.appendChild(showImage);
-    }
-    const showItems = document.querySelectorAll(".js-show");
-    for (const showItem of showItems) {
-        showItem.addEventListener("click", handleFavShow);
-
-    }
+        imageContainer.appendChild(showImage); 
 }
 
 function isFavShow(show) {
@@ -119,10 +98,15 @@ function isFavShow(show) {
     }
 }
 
-  
-function favPaint() {
-    favoritesContainer.innerHTML = "";
-    
+function paintFavoritesFromLocalStorage() {
+    const localStorageFavorites = localStorage.getItem("favorites");
+    favorites = JSON.parse(localStorageFavorites);
+    if (favorites === null) {
+        favorites = [];
+    }
+    favPaint();
+}
+function handleSearch() {
 /*     if (shows.length === 0) {
         let showWarningElement = document.createElement('p');
         showWarningElement.classList.add('empty-result');
@@ -130,54 +114,34 @@ function favPaint() {
         let showWarningMessage = document.createTextNode("no hay resultados");
         showWarningElement.appendChild(showWarningMessage);
     } */
-    for (const fav of favorites) {
-        //list item
-        let favItem = document.createElement('li');
-        favItem.classList.add('show', 'js-fav');
-        favItem.dataset.id = fav.show.id;
-        favoritesContainer.appendChild(favItem);
-        //title
-        let favTitleElement = document.createElement('h3');
-        favTitleElement.classList.add('show__title');
-        favItem.appendChild(favTitleElement);
-        let favTitleContent = document.createTextNode(fav.show.name);
-        favTitleElement.appendChild(favTitleContent);
-        //image
-        let imageContainer = document.createElement('div');
-        imageContainer.classList.add("show__img");
-        favItem.appendChild(imageContainer);
-        let favImage = document.createElement('img');
-        favImage.classList.add("show__image");
-        if (fav.show.image === null) {
-            favImage.src =
-                "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
-        } else {
-            favImage.src = fav.show.image.medium;
-        }
-        favImage.alt = fav.show.name;
-        imageContainer.appendChild(favImage);
-
-        //add class to shows fav in shows-section
-/*         const showRePaint = showsContainer.querySelector(`[data-id="${fav.show.id}"]`);
-        showRePaint.classList.add("fav-show-marked");
-        console.log(showRePaint); */
-    }
-    const favItems = document.querySelectorAll(".js-fav");
-    for (const favItem of favItems) {
-        favItem.addEventListener("click", handleFavShow);
-        
-    }
-    
+    getDataFromApi();
 }
 
-function paintFavoritesFromLocalStorage() {
-    const localStorageFavorites = localStorage.getItem("favorites");
-    favorites = JSON.parse(localStorageFavorites);
-    if (favorites === null) {
-        favorites = [];
-        return false;
+function handleFavShow(ev) {
+    const clickedShowId = parseInt(ev.currentTarget.dataset['id']);
+    //miro si ya estaba en favoritos
+    const favoritesFoundIndex = favorites.findIndex(favorite => favorite.show.id === clickedShowId );
+    if (favoritesFoundIndex === -1) {
+        //push: Añado favorito a la lista */
+    const showFound = shows.find(function (show) {
+        return show.show.id === clickedShowId;
+        });
+        favorites.push(showFound);
+    } else {
+        favorites.splice(favoritesFoundIndex, 1);
+
     }
+    saveFavorites();
     favPaint();
+    showsPaint();
+}
+
+function saveFavorites() {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+function handleForm(ev) {
+    ev.preventDefault();
 }
 
 paintFavoritesFromLocalStorage();
