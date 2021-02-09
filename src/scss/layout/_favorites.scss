@@ -11,6 +11,7 @@
     justify-content: space-between;
     text-align: center;
     @include tablet() {
+      justify-content: flex-start;
       max-width: 800px;
     }
   }
