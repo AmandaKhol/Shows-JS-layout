@@ -1,0 +1,2 @@
+paintFavoritesFromLocalStorage();
+restartWarning();
