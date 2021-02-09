@@ -1,9 +1,12 @@
 .page__header {
-  margin: 30px 0;
   color: $color-title;
   font-family: $font-title;
   font-size: 50px;
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
 }
