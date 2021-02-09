@@ -4,6 +4,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 50px;
+  background-color: $color-bg;
+  color: $color-font;
+  font-family: $font-main;
 }
 .center-column {
   @include tablet() {

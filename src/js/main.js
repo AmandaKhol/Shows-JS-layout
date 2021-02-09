@@ -11,11 +11,14 @@ let shows = [];
 let favorites = [];
 
 // prueba de maquetación
-
-filterInput.value = 'friends';
-getDataFromApi();
+/* filterInput.value = 'friends';
+getDataFromApi(); */
 
 function getDataFromApi() {
+  fetchToApiAndRenderResults();
+}
+
+function fetchToApiAndRenderResults() {
   fetch(`http://api.tvmaze.com/search/shows?q=${filterInput.value}`)
     .then((response) => response.json())
     .then((data) => {
@@ -24,6 +27,7 @@ function getDataFromApi() {
     })
     .catch((error) => error);
 }
+
 function renderShowsResult() {
   showsContainer.innerHTML = '';
   for (const show of shows) {
@@ -41,40 +45,52 @@ function renderFavResults() {
 }
 
 function renderShowItem(show) {
-  //list item
-  let showItem = document.createElement('li');
-  if (isFavShow(show)) {
-    showItem.classList.add('show', 'js-show', 'show__marked');
-  } else {
-    showItem.classList.add('show', 'js-show');
-  }
-  showItem.dataset.id = show.show.id;
-  showsContainer.appendChild(showItem);
+  let showItem = showCardElementCreation(show);
   renderShowCard(show, showItem);
 }
 
 function renderFavItem(fav) {
-  //list item
-  let favItem = document.createElement('li');
-  favItem.classList.add('show', 'show__fav', 'js-fav');
-  favItem.dataset.id = fav.show.id;
-  favoritesContainer.appendChild(favItem);
-  //show card
+  let favItem = favCardElementCreation(fav);
   renderShowCard(fav, favItem);
-  //close symbol
   renderCloseSymbol(favItem);
 }
 
 function renderShowCard(show, showItem) {
-  //title
+  showCardTitle(show, showItem);
+  showCardImage(show, showItem);
+}
+
+function showCardElementCreation(show) {
+  let showItem = document.createElement('li');
+  if (isFavShow(show)) {
+    showItem.classList.add('show__item', 'js-show', 'show__item--marked');
+  } else {
+    showItem.classList.add('show__item', 'js-show');
+  }
+  showItem.dataset.id = show.show.id;
+  showsContainer.appendChild(showItem);
+  return showItem;
+}
+
+function favCardElementCreation(fav) {
+  let favItem = document.createElement('li');
+  favItem.classList.add('show__item', 'show__fav', 'js-fav');
+  favItem.dataset.id = fav.show.id;
+  favoritesContainer.appendChild(favItem);
+  return favItem;
+}
+
+function showCardTitle(show, showItem) {
   let showTitleElement = document.createElement('h3');
-  showTitleElement.classList.add('show__title');
+  showTitleElement.classList.add('show__item--title');
   showItem.appendChild(showTitleElement);
   let showTitleContent = document.createTextNode(show.show.name);
   showTitleElement.appendChild(showTitleContent);
-  //image
+}
+
+function showCardImage(show, showItem) {
   let showImage = document.createElement('img');
-  showImage.classList.add('show__image');
+  showImage.classList.add('show__item--image');
   if (show.show.image === null) {
     showImage.src =
       'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
@@ -82,6 +98,7 @@ function renderShowCard(show, showItem) {
     showImage.src = show.show.image.medium;
   }
   showImage.alt = show.show.name;
+  showImage.title = show.show.name;
   showItem.appendChild(showImage);
 }
 
@@ -110,12 +127,14 @@ function addEventListenerFavs() {
     favItem.addEventListener('click', handleFavShow);
   }
 }
+
 function addEventListenerShows() {
   const showItems = document.querySelectorAll('.js-show');
   for (const showItem of showItems) {
     showItem.addEventListener('click', handleFavShow);
   }
 }
+
 function paintFavoritesFromLocalStorage() {
   const localStorageFavorites = localStorage.getItem('favorites');
   favorites = JSON.parse(localStorageFavorites);

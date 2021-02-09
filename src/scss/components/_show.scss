@@ -1,4 +1,4 @@
-.show {
+.show__item {
   width: 300px;
   border: 1px solid $color-secondary;
   border-radius: 5px;
@@ -8,19 +8,18 @@
   align-items: center;
   padding: 5px 0;
   margin: 5px 0px;
-
-  &__image {
+  &--image {
     height: 150px;
     width: auto;
     border-radius: 5px;
   }
 
-  &__title {
+  &--title {
     font-size: 24px;
     margin: 7px;
     text-align: center;
   }
-  &__marked {
+  &--marked {
     background-color: $color-secondary;
     color: $color-font-selected;
   }
@@ -29,11 +28,11 @@
 .show__fav {
   width: 200px;
   cursor: pointer;
-  & .show__title {
+  & .show__item--title {
     font-size: 18px;
   }
 
-  & .show__image {
+  & .show__item--image {
     height: 100px;
     width: auto;
     border-radius: 5px;
