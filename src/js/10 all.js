@@ -1,4 +1,4 @@
-'use strict';
+/* 'use strict';
 
 const filterInput = document.querySelector('.js-filter');
 const formElement = document.querySelector('.js-form');
@@ -9,10 +9,6 @@ const reset = document.querySelector('.js-reset');
 
 let shows = [];
 let favorites = [];
-
-// prueba de maquetación
-/* filterInput.value = 'friends';
-getDataFromApi(); */
 
 function getDataFromApi() {
   fetchToApiAndRenderResults();
@@ -189,3 +185,4 @@ paintFavoritesFromLocalStorage();
 searchButton.addEventListener('click', handleSearch);
 formElement.addEventListener('submit', handleForm);
 reset.addEventListener('click', handleReset);
+ */
