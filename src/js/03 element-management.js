@@ -53,7 +53,7 @@ function isFavShow(show) {
 
 function restartWarning() {
   const warningMessage = document.querySelector('.warning');
-if (warningMessage !== null) {
-  warningMessage.parentNode.removeChild(warningMessage);
-}
+  if (warningMessage !== null) {
+    warningMessage.parentNode.removeChild(warningMessage);
+  }
 }

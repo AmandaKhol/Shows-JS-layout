@@ -1,5 +1,8 @@
 function renderShowsResult() {
   showsContainer.innerHTML = '';
+  if (shows.length !== 0) {
+    showsSection.classList.remove('hidden');
+  }
   for (const show of shows) {
     renderShowItem(show);
   }
