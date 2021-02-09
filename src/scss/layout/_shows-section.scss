@@ -10,3 +10,7 @@
   @include desktop() {
   }
 }
+
+.hidden {
+  display: none;
+}
