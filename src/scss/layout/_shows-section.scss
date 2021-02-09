@@ -1,15 +1,13 @@
-.page {
+.shows-list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 50px;
-}
-.center-column {
+  margin: 10px 0px;
   @include tablet() {
-    margin: 0 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   @include desktop() {
-    margin: 0 70px;
   }
 }

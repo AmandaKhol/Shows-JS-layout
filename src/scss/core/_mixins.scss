@@ -1,0 +1,38 @@
+/* Mixins for media queries */
+@mixin tablet {
+  @media all and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media all and (min-width: 1200px) {
+    @content;
+  }
+}
+
+/* Typography mixin */
+@mixin typo-basics {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+}
+
+/* Hero and footer button mixin */
+
+@mixin button-links($link_width) {
+  box-sizing: border-box;
+  border: solid 2px $color-button;
+  width: $link_width;
+  border-radius: 22.5px;
+  height: 45px;
+  text-align: center;
+  border-color: $color-button;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 2.25;
+  text-align: center;
+  text-decoration: none;
+  @include typo-basics();
+  @content;
+}

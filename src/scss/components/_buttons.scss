@@ -1,0 +1,25 @@
+.search {
+  background-color: $color-button;
+  box-sizing: border-box;
+  color: $color-bg;
+  border-radius: 5px;
+  border: none;
+  font-family: $font-button;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-left: 20px;
+}
+
+.reset {
+  background-color: $color-button;
+  box-sizing: border-box;
+  color: $color-bg;
+  border: none;
+  font-family: $font-button;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  display: block;
+  width: 100px;
+  border-radius: 5px;
+}
