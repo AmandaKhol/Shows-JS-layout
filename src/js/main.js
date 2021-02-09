@@ -11,8 +11,8 @@ let shows = [];
 let favorites = [];
 
 // prueba de maquetación
-/* filterInput.value = 'friends';
-getDataFromApi(); */
+filterInput.value = 'friends';
+getDataFromApi();
 
 function getDataFromApi() {
   fetchToApiAndRenderResults();

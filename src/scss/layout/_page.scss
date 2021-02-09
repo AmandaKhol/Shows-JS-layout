@@ -9,10 +9,19 @@
   font-family: $font-main;
 }
 .center-column {
+  margin: 0 15px;
   @include tablet() {
-    margin: 0 50px;
+    margin: 0 25px;
   }
   @include desktop() {
-    margin: 0 70px;
+    margin: 0 30px;
+  }
+}
+.sections {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  @include tablet() {
+    flex-direction: row;
   }
 }
