@@ -6,6 +6,7 @@ const searchButton = document.querySelector('.js-search');
 const showsContainer = document.querySelector('.js-shows-list');
 const favoritesContainer = document.querySelector('.js-fav-list');
 const reset = document.querySelector('.js-reset');
+const filterSection = document.querySelector('.filter-section');
 
 let shows = [];
 let favorites = [];

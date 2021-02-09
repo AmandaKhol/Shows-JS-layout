@@ -37,3 +37,11 @@ function renderCloseSymbol(favItem) {
   closeIcon.appendChild(closeSymbol);
   favItem.appendChild(closeIcon);
 }
+
+function renderErrorMessage(stringMessage) {
+  let warning = document.createElement('span');
+  warning.classList.add('warning');
+  let warningMessage = document.createTextNode(stringMessage);
+  filterSection.appendChild(warning);
+  warning.appendChild(warningMessage);
+}

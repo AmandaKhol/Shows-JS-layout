@@ -7,7 +7,12 @@ function fetchToApiAndRenderResults() {
     .then((response) => response.json())
     .then((data) => {
       shows = data;
+        if (shows.length === 0) {
+    renderErrorMessage('no hay resultados para tu búsqueda');
+  }
       renderShowsResult();
     })
-    .catch((error) => error);
+    .catch((error) => {
+      renderErrorMessage('Servicio temporalmente no disponible');
+    });
 }

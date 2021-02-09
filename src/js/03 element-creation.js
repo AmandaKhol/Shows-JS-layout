@@ -50,3 +50,10 @@ function isFavShow(show) {
     return true;
   }
 }
+
+function restartWarning() {
+  const warningMessage = document.querySelector('.warning');
+if (warningMessage !== null) {
+  warningMessage.parentNode.removeChild(warningMessage);
+}
+}

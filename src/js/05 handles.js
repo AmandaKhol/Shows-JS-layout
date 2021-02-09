@@ -1,8 +1,10 @@
 function handleSearch() {
+  restartWarning();
   getDataFromApi();
 }
 
 function handleFavShow(ev) {
+  restartWarning();
   const clickedShowId = parseInt(ev.currentTarget.dataset['id']);
   //check if the show exists in favorites
   const favoritesFoundIndex = favorites.findIndex(
