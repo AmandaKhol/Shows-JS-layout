@@ -1,5 +1,7 @@
 'use strict';
 
+//Global variables
+
 const filterInput = document.querySelector('.js-filter');
 const formElement = document.querySelector('.js-form');
 const searchButton = document.querySelector('.js-search');

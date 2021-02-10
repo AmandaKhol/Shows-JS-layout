@@ -1,3 +1,5 @@
+//HTML tags creation for each Element of the web
+
 function showCardElementCreation(show) {
   let showItem = document.createElement('li');
   if (isFavShow(show)) {
@@ -39,6 +41,8 @@ function showCardImage(show, showItem) {
   showImage.title = show.show.name;
   showItem.appendChild(showImage);
 }
+
+//Additional functions
 
 function isFavShow(show) {
   const favoriteFound = favorites.find((favorite) => {

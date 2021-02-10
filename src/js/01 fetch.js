@@ -1,3 +1,5 @@
+// Fetch to API TVMaze
+
 function getDataFromApi() {
   fetchToApiAndRenderResults();
 }

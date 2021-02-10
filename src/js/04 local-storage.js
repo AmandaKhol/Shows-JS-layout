@@ -1,3 +1,5 @@
+// Local Storage
+
 function paintFavoritesFromLocalStorage() {
   const localStorageFavorites = localStorage.getItem('favorites');
   favorites = JSON.parse(localStorageFavorites);

@@ -1,3 +1,5 @@
+//Handles
+
 function handleSearch() {
   restartWarning();
   getDataFromApi();
@@ -6,20 +8,7 @@ function handleSearch() {
 function handleFavShow(ev) {
   restartWarning();
   const clickedShowId = parseInt(ev.currentTarget.dataset['id']);
-  //check if the show exists in favorites
-  const favoritesFoundIndex = favorites.findIndex(
-    (favorite) => favorite.show.id === clickedShowId
-  );
-  if (favoritesFoundIndex === -1) {
-    //add to favorite list the show object
-    const showFound = shows.find(function (show) {
-      return show.show.id === clickedShowId;
-    });
-    favorites.push(showFound);
-  } else {
-    //remove from favorites
-    favorites.splice(favoritesFoundIndex, 1);
-  }
+  updateShowFavList(clickedShowId);
   saveFavorites();
   renderFavResults();
   renderShowsResult();
@@ -34,4 +23,21 @@ function handleReset() {
   localStorage.removeItem('favorites');
   renderFavResults();
   renderShowsResult();
+}
+
+function updateShowFavList(clickedShowId) {
+  //check if the show exists in favorites
+  const favoritesFoundIndex = favorites.findIndex(
+    (favorite) => favorite.show.id === clickedShowId
+  );
+  if (favoritesFoundIndex === -1) {
+    //add to favorite list the show object
+    const showFound = shows.find(function (show) {
+      return show.show.id === clickedShowId;
+    });
+    favorites.push(showFound);
+  } else {
+    //remove from favorites
+    favorites.splice(favoritesFoundIndex, 1);
+  }
 }

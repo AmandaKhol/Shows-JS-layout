@@ -1,2 +1,8 @@
-paintFavoritesFromLocalStorage();
-restartWarning();
+//Inicialization
+
+function run() {
+  paintFavoritesFromLocalStorage();
+  restartWarning();
+}
+
+run();

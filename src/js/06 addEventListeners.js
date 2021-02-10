@@ -1,3 +1,5 @@
+//Event Listeners
+
 function addEventListenerFavs() {
   const favItems = document.querySelectorAll('.js-fav');
   for (const favItem of favItems) {
