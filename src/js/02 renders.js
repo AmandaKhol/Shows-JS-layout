@@ -1,3 +1,5 @@
+// Renders
+
 function renderShowsResult() {
   showsContainer.innerHTML = '';
   if (shows.length !== 0) {
