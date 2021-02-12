@@ -14,6 +14,8 @@ function addEventListenerShows() {
   }
 }
 
+
 searchButton.addEventListener('click', handleSearch);
 formElement.addEventListener('submit', handleForm);
 reset.addEventListener('click', handleReset);
+totalResults.addEventListener('click', handleTotalResults);

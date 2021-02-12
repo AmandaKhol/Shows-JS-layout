@@ -41,3 +41,15 @@ function updateShowFavList(clickedShowId) {
     favorites.splice(favoritesFoundIndex, 1);
   }
 }
+
+function handleTotalResults(){
+  const checkNumber = totalResultsComputed();
+  for (const number of interview) {
+    if (checkNumber < number) {
+      console.log(`El número de series (${checkNumber}) es menor que  ${number}`);
+    } else {
+      console.log(`El número de series (${checkNumber}) es mayor que  ${number}`);
+    }
+    
+  }
+}

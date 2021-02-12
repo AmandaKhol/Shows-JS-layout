@@ -28,6 +28,14 @@ function showCardTitle(show, showItem) {
   showTitleElement.appendChild(showTitleContent);
 }
 
+function showCardPremier(show, showItem) {
+  let showPremierElement = document.createElement('p');
+  showPremierElement.classList.add('show__item--premier');
+  showItem.appendChild(showPremierElement);
+  let showPremierContent = document.createTextNode(show.show.premiered);
+  showPremierElement.appendChild(showPremierContent);
+}
+
 function showCardImage(show, showItem) {
   let showImage = document.createElement('img');
   showImage.classList.add('show__item--image');
@@ -61,3 +69,9 @@ function restartWarning() {
     warningMessage.parentNode.removeChild(warningMessage);
   }
 }
+
+function totalResultsComputed() {
+  totalResults.innerHTML = `${shows.length}`;
+  return shows.length;
+}
+

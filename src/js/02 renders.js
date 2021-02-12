@@ -9,6 +9,7 @@ function renderShowsResult() {
     renderShowItem(show);
   }
   addEventListenerShows();
+  totalResultsComputed();
 }
 
 function renderFavResults() {
@@ -32,6 +33,7 @@ function renderFavItem(fav) {
 
 function renderShowCard(show, showItem) {
   showCardTitle(show, showItem);
+  showCardPremier(show, showItem);
   showCardImage(show, showItem);
 }
 
