@@ -28,12 +28,12 @@ function handleReset() {
 function updateShowFavList(clickedShowId) {
   //check if the show exists in favorites
   const favoritesFoundIndex = favorites.findIndex(
-    (favorite) => favorite.show.id === clickedShowId
+    (favorite) => favorite.id === clickedShowId
   );
   if (favoritesFoundIndex === -1) {
     //add to favorite list the show object
     const showFound = shows.find(function (show) {
-      return show.show.id === clickedShowId;
+      return show.id === clickedShowId;
     });
     favorites.push(showFound);
   } else {
@@ -42,7 +42,7 @@ function updateShowFavList(clickedShowId) {
   }
 }
 
-function handleTotalResults(){
+/* function handleTotalResults(){
   const checkNumber = totalResultsComputed();
   for (const number of interview) {
     if (checkNumber < number) {
@@ -52,4 +52,4 @@ function handleTotalResults(){
     }
     
   }
-}
+} */
