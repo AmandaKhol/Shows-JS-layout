@@ -1,32 +1,27 @@
-# Módulo 2 - Evaluación final.
+# TV Shows - HTML, CSS, SASS & JavaScript
 
-En este repositorio se encuentran los ficheros generados en la realización de la **Evaluación final del Módulo 2 - Promo L**.
-Para llevar a cabo el desarrollo de los ficheros `.html` y `.scss` se ha empleado el [Adalab - Web starter kit](https://github.com/Adalab/Adalab-web-starter-kit), creado en **node y gulp** por la asociación [Adalab](https://adalab.es/).
+The main goal of this project is to create a web site using HTML, CSS, SASS and JavaScript.
 
-> **NOTA:** Pueces acceder directacmente a este [enlace](http://beta.adalab.es/modulo-2-evaluacion-final-AmandaKhol/) para ver el resultado de la maquetación.
+The website uses the API [TVMaze](https://www.tvmaze.com/api). The user can search the TV shows included on the database filtering by name. Clicking on the TV show, the user can include the show selected on the list "Favorites". The web also includes a Reset button.
 
-## Guía de inicio rápido
+## Tools
 
-> **NOTA:** Necesitas tener instalado [NodeJS](https://nodejs.org/en//)
+- HTML
+- CSS
+- SASS
+- JavaScript (ES6)
 
 ### Pasos a seguir para arrancar la web en local:
 
-1. Clona este repositorio
-2. Realizar la instalación de las dependencias mediante:
+1. Clone this repository
+2. Install the dependencies
 
 ```bash
 npm install
 ```
 
-3. Una vez finalizada la instalación de dependencias aparecerá una carpeta denominada `node_modules/`.
-4. Por último, ejecuta el siguiente comando para proceder a la visualización:
+3. Run the code
 
 ```bash
 npm start
 ```
-
-Este comando **Abre una ventana de Chrome y muestra la página web**, al igual que hace el plugin de VS Code Live Server (Go live).
-
-## ¿Has encontrado algún error?
-
-Si has detectado un problema o quieres hacer una aportación, puedes realizar una PR.
